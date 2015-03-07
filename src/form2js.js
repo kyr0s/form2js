@@ -90,6 +90,7 @@
 	{
 		var result = {},
 			arrays = {},
+            processedNames = {},
 			i, j, k, l,
 			value,
 			nameParts,
@@ -103,11 +104,16 @@
 
 		for (i = 0; i < nameValues.length; i++)
 		{
+            name = nameValues[i].name;
 			value = nameValues[i].value;
+
+            if (processedNames[name])
+                continue;
+            else
+                processedNames[name] = true;
 
 			if (skipEmpty && (value === '' || value === null)) continue;
 
-			name = nameValues[i].name;
 			_nameParts = name.split(delimiter);
 			nameParts = [];
 			currResult = result;
